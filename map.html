@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Mapbox API</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body{ 
+                margin:0; padding:0; 
+            }
+
+        #map{ 
+                position:absolute; 
+                top:0; 
+                bottom:0; 
+                width:100%; 
+            }
+
+        .overlay{
+                    position: absolute;
+                    top: 90%;
+                    left: 90%;
+                }
+
+        .overlay button{
+                            font:600 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+                            background-color: #3386c0;
+                            color: #fff;
+                            display: inline-block;
+                            margin: 0;
+                            padding: 10px 20px;
+                            border: none;
+                            cursor: pointer;
+                            border-radius: 3px; 
+                        }
+
+        .overlay button:hover{
+                                background-color:#4ea0da;
+                             }
+    </style>
+</head>
+<body>
+    <div id='map'></div>
+    <div class='overlay'>
+        <button type="reset"  onClick="map.removeLayer('route');">Reset</button>
+    </div>
+    
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoicmV2YW5zaWRkIiwiYSI6ImNqdGx0MjFxZjBiMnIzeXFxajhwM3JhazkifQ.8bL0ihI55Sl5Wv_Bucl0Yg';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [77.627933, 12.976559],
+            zoom: 11
+        });
+ 
+        map.on('load', function () {
+            map.addLayer({
+                "id": "route",
+                "type": "line",
+                "source": {
+                "type": "geojson",
+                "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                                    [77.679176, 13.000878],
+                                    [77.701492, 12.968093],
+                                    [77.695313, 12.939653],
+                                    [77.683468, 12.928945],
+                                    [77.665100, 12.920914],
+                                    [77.645531, 12.924261],
+                                    [77.620640, 12.921333],
+                                    [77.605534, 12.951364],
+                                    [77.606735, 12.966253],
+                                    [77.604847, 12.970769],
+                                    [77.611885, 12.974115],
+                                    [77.619524, 12.972442],
+                                    [77.628622, 12.978297],
+                                    [77.631111, 12.981308],
+                                    [77.635918, 12.982562],
+                                    [77.676601, 13.000042],
+                                    [77.679176, 13.000878]
+                                ]
+                            }
+                        }
+                    },
+                "layout":{
+                            "line-join": "round",
+                            "line-cap": "round"
+                        },
+                "paint": {
+                            "line-color": "#007cbf",
+                            "line-width": 5
+                         }
+            });
+    });
+
+</script> 
+</body>
+</html>
